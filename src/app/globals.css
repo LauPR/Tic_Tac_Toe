@@ -3,10 +3,22 @@
 :root {
   --bg-primary: #F9F9F8;
   --bg-secondary: #F0F0EC;
+
   --text-primary: #1E1E1C;
   --text-secondary: #5A5A55;
+
+  --accent-main: #48803d;
+  --hover-main: #3d6b34;
+  --focus-main: #32562a;
+
   --accent-primary: #2D6A8F;
-  --accent-secondary: #8f2d2d;
+  --hover-primary: #265a7a;
+  --focus-primary: #1f4b65;
+
+  --accent-secondary: #b41c1c;
+  --hover-secondary: #9a1818;
+  --focus-secondary: #801414;
+
   --border: #D6D4CE;
   --shadow: #E8E7E2;
 }
@@ -14,10 +26,22 @@
 @theme inline {
   --color-bg-primary: var(--bg-primary);
   --color-bg-secondary: var(--bg-secondary);
+
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
+
+  --color-accent-main: var(--accent-main);
+  --color-hover-main: var(--hover-main);
+  --color-focus-main: var(--focus-main);
+
   --color-accent-primary: var(--accent-primary);
+  --color-hover-primary: var(--hover-primary);
+  --color-focus-primary: var(--focus-primary);
+
   --color-accent-secondary: var(--accent-secondary);
+  --color-hover-secondary: var(--hover-secondary);
+  --color-focus-secondary: var(--focus-secondary);
+
   --color-border: var(--border);
   --color-shadow: var(--shadow);
 
@@ -29,10 +53,22 @@
   :root {
     --bg-primary: #121212;
     --bg-secondary: #1F1F1F;
+
     --text-primary: #F0F0F0;
     --text-secondary: #A5A5A5;
+
+    --accent-main: #6dc25c;
+    --hover-main: #5eae4e;
+    --focus-main: #4f9a41;
+
     --accent-primary: #5D9EC3;
-    --accent-secondary: #c35d5d;
+    --hover-primary: #4f89aa;
+    --focus-primary: #417491;
+
+    --accent-secondary: #e42525;
+    --hover-secondary: #c21f1f;
+    --focus-secondary: #a01a1a;
+
     --border: #4A4A4A;
     --shadow: #101010;
   }
