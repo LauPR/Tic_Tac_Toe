@@ -1,3 +1,4 @@
+import Gameboard from "@/components/game/Gameboard";
 import Button from "@/components/ui/Button";
 
 export default function Home() {
@@ -27,9 +28,8 @@ export default function Home() {
           Tic Tac Toe
         </h1>
 
-        <Button text="large" size={'lg'} variant={'player1'}/>
-        <Button text="medium" size={'md'}/>
-        <Button text="small" size={'sm'} variant={'player2'}/>
+        <Button text="Let's Play!" size={'md'}/>
+        <Gameboard/>
 
       </main>
 
