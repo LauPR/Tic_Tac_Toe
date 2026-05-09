@@ -7,7 +7,7 @@ export default function Home() {
     <div
       className="
         bg-bg-primary 
-        h-screen 
+        min-h-screen 
         text-text-primary
         cursor-default
       "
@@ -28,8 +28,11 @@ export default function Home() {
           Tic Tac Toe
         </h1>
 
-        <Button text="Let's Play!" size={'md'}/>
-        <Gameboard/>
+        <div className="flex justify-center">
+          <Button text="Let's Play!" size={'md'} />
+        </div>
+
+        <Gameboard />
 
       </main>
 

@@ -28,15 +28,25 @@ export default function Gameboard() {
     }
 
     return (
-        <div className="bg-bg-secondary ">
-            <div className="grid grid-cols-3 gap-4">
+        <div className="flex items-center justify-center">
+            <div className="grid grid-cols-3 w-fit max-w-full bg-bg-secondary">
                 {board.map((row, i) =>
                     row.map((column, j) =>
                     (
                         <button
                             key={`${i}-${j}`}
                             onClick={() => updateCell(i, j)}
-                            className="bg-amber-400 text-9xl h-32 w-32"
+                            className="
+                                flex 
+                                aspect-square 
+                                w-20 
+                                sm:w-24 
+                                md:w-28 
+                                lg:w-32
+                                items-center 
+                                justify-center 
+                                border-2 
+                                border-accent-main"
                         >
                             {column === 'X' && <X />}
                             {column === 'O' && <Circle />}
