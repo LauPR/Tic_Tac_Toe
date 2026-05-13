@@ -5,10 +5,11 @@ type ButtonProps = {
     variant?: 'primary' | 'player1' | 'player2';
     size?: 'sm' | 'md' | 'lg';
     className?: React.ReactNode;
+    onClick?: () => void;
 }
 
 export default function Button({
-    text, variant = 'primary', size = 'md', className
+    text, variant = 'primary', size = 'md', className, onClick
 }: ButtonProps) {
 
     const variants = {
@@ -37,6 +38,7 @@ export default function Button({
                 sizes[size],
                 className
             )}
+            onClick={onClick}
         >
 
             {text}
