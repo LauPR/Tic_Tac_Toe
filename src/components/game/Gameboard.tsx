@@ -18,9 +18,10 @@ export default function Gameboard() {
     const [turn, setTurn] = useState<'X' | 'O'>('X');
     const [winner, setWinner] = useState<'X' | 'O' | null>(null);
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
+    const [winningLine, setWinningLine] = useState<number[][] | null>(null);
 
     //functions
-    function checkWinner(board: GameboardType): 'X' | 'O' | null {
+    function checkWinner(board: GameboardType): { winner: 'X' | 'O' | null, line: number[][] | null } {
 
         const winningCombinations = [
             //rows
@@ -44,14 +45,20 @@ export default function Gameboard() {
             const value3 = board[row3][col3];
 
             if (value1 && value1 === value2 && value1 === value3)
-                return value1;
+                return { winner: value1, line: combination };
         }
 
-        return null;
+        return { winner: null, line: null };
     }
 
     function checkTie(board: GameboardType): boolean {
         return board.every(row => row.every(col => col !== null))
+    }
+
+    function isWinningCombination(row: number, col: number): boolean {
+        if (!winningLine) return false;
+
+        return winningLine.some(([r, c]) => r === row && c === col);
     }
 
     function updateCell(row: number, column: number) {
@@ -65,11 +72,12 @@ export default function Gameboard() {
         setBoard(newBoard);
 
 
-        const gameWinner = checkWinner(newBoard);
+        const { winner: gameWinner, line: winningCombination } = checkWinner(newBoard);
         const isTie = checkTie(newBoard);
 
         if (gameWinner) {
             setWinner(gameWinner);
+            setWinningLine(winningCombination);
             setIsGameOver(true);
         }
         else if (isTie) {
@@ -89,18 +97,27 @@ export default function Gameboard() {
         setTurn('X');
         setIsGameOver(false);
         setWinner(null);
+        setWinningLine(null);
     }
 
     return (
-        <div className="flex items-center justify-center">
+        <div className="flex flex-col items-center justify-center gap-3">
 
-            <div className="">
+            <div className="text-2xl">
                 {winner ? (
-                    <div>{winner} won the game!</div>
+                    <div>
+                        <span className={turn === 'X' ? 'text-accent-primary mx-1' : 'text-accent-secondary mx-1'}>
+                            {winner}
+                        </span> won the game!
+                    </div>
                 ) : isGameOver ? (
                     <div>It's a tie!</div>
                 ) : (
-                    <div>Playing: {turn}</div>
+                    <div>Playing:
+                        <span className={turn === 'X' ? 'text-accent-primary mx-1' : 'text-accent-secondary mx-1'}>
+                            {turn}
+                        </span>
+                    </div>
                 )}
             </div>
 
@@ -112,6 +129,7 @@ export default function Gameboard() {
                             key={`${i}-${j}`}
                             onClick={() => updateCell(i, j)}
                             className="
+                                relative
                                 flex 
                                 aspect-square 
                                 w-20 
@@ -123,10 +141,17 @@ export default function Gameboard() {
                                 border-2 
                                 border-accent-main"
                         >
-                            {column === 'X' && <X />}
-                            {column === 'O' && <Circle />}
+                            {column === 'X' && <X className="text-accent-primary" size={50} />}
+                            {column === 'O' && <Circle className="text-accent-secondary" size={50} />}
                             {column === null && ''}
+
+                            {isWinningCombination(i, j) && (
+                                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                    <div className={`w-full h-1 ${winner === 'X' ? 'bg-accent-primary' : 'bg-accent-secondary'} transform rotate-45`}></div>
+                                </div>
+                            )}
                         </button>
+
                     )
                     )
                 )}
